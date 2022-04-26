@@ -15,13 +15,15 @@ public class SkillsController {
                 <html>
                     """ + getStyle() + """
                     <body>
-                        <h1>Skills Tracker</h1>
-                        <h2>We <span class='heart'>&hearts;</span> to learn the following skills:</h2>
-                        <ol>
-                            <li>Java</li>
-                            <li>JavaScript</li>
-                            <li>Python</li>
-                        </ol>
+                        <div class="container">
+                            <h1>Skills Tracker</h1>
+                            <h2>We <span class='heart'>&hearts;</span> to learn the following skills:</h2>
+                            <ol>
+                                <li>Java</li>
+                                <li>JavaScript</li>
+                                <li>Python</li>
+                            </ol>
+                        </div>
                     </body>
                 </html>
                 """;
@@ -32,15 +34,17 @@ public class SkillsController {
                 <html>
                     """ + getStyle() + """
                     <body>
-                        <form action="result" method="post">
-                            Hi! &#x1F44B<br/>What's your
-                            <input type="text" name="name" placeholder="Name"><br/>
-                            I'd <span class="heart">&hearts;</span> to know you your favorite programming skills.<br/>
-                            What's your <input list="languages" name="firstLanguage" placeholder="First Favorite"><br/>
-                            What's your <input list="languages" name="secondLanguage" placeholder="Second Favorite"><br/>
-                            What's your <input list="languages" name="thirdLanguage" placeholder="Third Favorite"><br/>
-                            <input type="submit" value="Here Ya Go!">
-                        </form>
+                        <div class="container">
+                            <form action="result" method="post">
+                                Hi! &#x1F44B<br/>What's your
+                                <input type="text" name="name" placeholder="Name"><br/>
+                                I'd <span class="heart">&hearts;</span> to know you your favorite programming skills.<br/>
+                                What's your <input list="languages" name="firstLanguage" placeholder="First Favorite"><br/>
+                                What's your <input list="languages" name="secondLanguage" placeholder="Second Favorite"><br/>
+                                What's your <input list="languages" name="thirdLanguage" placeholder="Third Favorite"><br/>
+                                <input type="submit" value="Here Ya Go!">
+                            </form>
+                        </div>
                     </body>
                     <datalist id='languages'>
                         <option value="Java">Java</option>
@@ -59,33 +63,37 @@ public class SkillsController {
                 <html>
                     """ + getStyle() + """
                     <body>
-                        Nice to meet you, <h1>""" + name + """
-                        !</h1>
-                        I organized your responses in this neat little table.<br/>
-                        Check it out!<br/>
-                        <table>
-                            <tr class='headerRow'>
-                                <td>Order Chosen</td>
-                                <td>Programming Skill</td>
-                            </tr>
-                            <tr>
-                                <td>First</td>
-                                <td>"""+ firstLanguage +"""
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Second</td>
-                                <td>"""+ secondLanguage +"""
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Third</td>
-                                <td>"""+ thirdLanguage +"""
-                                </td>
-                            </tr>
-                        </table>
-                        <br/>
-                        I really <span class="heart">&hearts; &hearts; &hearts;</span> all of those too!
+                        <div class="container">
+                            Nice to meet you, <h1>""" + name + """
+                            !</h1>
+                            I organized your responses in this neat little table.<br/>
+                            Check it out!<br/>
+                            <table>
+                                <tr class='headerRow'>
+                                    <td>Order Chosen</td>
+                                    <td>Programming Skill</td>
+                                </tr>
+                                
+                                <tr>
+                                    <td class='favorite'>First</td>
+                                    <td class='favorite'>"""+ firstLanguage +"""
+                                    </td>
+                                </tr>
+                                
+                                <tr>
+                                    <td>Second</td>
+                                    <td>"""+ secondLanguage +"""
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Third</td>
+                                    <td>"""+ thirdLanguage +"""
+                                    </td>
+                                </tr>
+                            </table>
+                            <br/>
+                            I really <span class="heart">&hearts; &hearts; &hearts;</span> all of those too!
+                        </div>
                     </body>
                 </html>
                 """;
@@ -94,10 +102,11 @@ public class SkillsController {
     private String getStyle(){
         return """
                 <style>
-                        body{
+                        .container{
                             padding: 5px;
                             background: linear-gradient(black,blue);
                             width: 80%;
+                            margin: auto;
                             display: flex;
                             flex-direction: column;
                             align-items: center;
@@ -115,15 +124,37 @@ public class SkillsController {
                             padding: 10px;
                         }
                         .headerRow{
-                            text-decoration: underline;
                             background: linear-gradient(black,darkgray);
                         }
                         td{
-                            padding: 5px;
                             text-align: center;
+                            padding: 0 15px;
                         }
                         table{
                             border: 1px solid darkgray;
+                            border-collapse: collapse;
+                            color: white;
+                        }
+                        tr{
+                            height: 35px;
+                            border-top: 1px solid darkgray;
+                        }
+                        
+                        .favorite::after, .favorite::before{
+                            content: "🎔";
+                            color: red;
+                            animation: beatingHeart 1s alternate infinite linear;
+                        }
+                        @keyframes beatingHeart{
+                            15%{
+                                font-size: 17px;
+                            }
+                            75%{
+                                font-size: 16px;
+                            }
+                            85%{
+                                font-size: 17px;
+                            }
                         }
                     </style>
                 """;
